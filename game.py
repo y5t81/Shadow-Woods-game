@@ -40,7 +40,8 @@ def make_buttons(labels, commands):
 
     for lbl, cmd in zip(labels, commands):
         tk.Button(button_frame, text=lbl, command=cmd, width=20).pack(pady=3)
-        print("You feel a cold breeze as you enter...")
+          
+    print("You feel a cold breeze as you enter...")
 
 # --- WINDOW SETUP ---
 
