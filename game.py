@@ -1,28 +1,58 @@
-print ("Welome to shadow woods!")
+# I acknowledge the use of AI (ChatGPT – GPT-5) in the development of this project.
 
-choice = input("Do you want to go left or right?")
+import tkinter as tk
 
-if choice.lower() == "left":
-    print("You discover an old cabin with a glowing door!")
+# --- GAME LOGIC ---
 
-    second = input("Do you ENTER or IGNORE it? ")
+def start_game():
+    text.set("You are in Shadow Woods.\nDo you want to go left or right?")
+    make_buttons(["Left", "Right"], [left_path, right_path])
 
-    if second.lower() == "enter":
-        print("Inside, you see a dusty book on a table.")
+def left_path():
+    text.set("You discover an old cabin with a glowing door!\nDo you ENTER or IGNORE it?")
+    make_buttons(["Enter", "Ignore"], [enter_cabin, ignore_cabin])
 
-        third = input("Do you READ or LEAVE it? ")
+def right_path():
+    text.set("A tall figure emerges from the trees...\nYou are never seen again.\nGAME OVER.")
+    make_buttons(["Restart"], [start_game])
 
-        if third.lower() == "read":
-            print("The book grants you forbidden knowledge. You escape safely!")
-        else:
-            print("A shadow rises from the book and consumes you! Game over.")
+def enter_cabin():
+    text.set("Inside, you see a dusty book on a table.\nDo you READ or LEAVE it?")
+    make_buttons(["Read", "Leave"], [read_book, leave_book])
 
+def ignore_cabin():
+    text.set("You walk away, but something follows you...\nYou vanish into the darkness.\nGAME OVER.")
+    make_buttons(["Restart"], [start_game])
 
-    else:
-        print("You walk away, but something follows you...")
-        print("You vanish into the darkness. Game over.")
+def read_book():
+    text.set("The book grants you forbidden knowledge.\nYou escape safely!\nYOU WIN!")
+    make_buttons(["Restart"], [start_game])
 
+def leave_book():
+    text.set("A shadow rises from the book and consumes you!\nGAME OVER.")
+    make_buttons(["Restart"], [start_game])
 
-else:
-    print("A tall figure emerges from the trees...")
-    print("You are never seen again. Game over.")
+# --- GUI HELPERS ---
+
+def make_buttons(labels, commands):
+    for widget in button_frame.winfo_children():
+        widget.destroy()
+
+    for lbl, cmd in zip(labels, commands):
+        tk.Button(button_frame, text=lbl, command=cmd, width=20).pack(pady=3)
+
+# --- WINDOW SETUP ---
+
+window = tk.Tk()
+window.title("Shadow Woods")
+
+text = tk.StringVar()
+label = tk.Label(window, textvariable=text, wraplength=400, height=6)
+label.pack(pady=20)
+
+button_frame = tk.Frame(window)
+button_frame.pack()
+
+start_game()
+
+window.mainloop()
