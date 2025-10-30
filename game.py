@@ -10,6 +10,14 @@ if choice.lower() == "left":
     if second.lower() == "enter":
         print("Inside, you see a dusty book on a table.")
 
+        third = input("Do you READ or LEAVE it? ")
+
+        if third.lower() == "read":
+            print("The book grants you forbidden knowledge. You escape safely!")
+        else:
+            print("A shadow rises from the book and consumes you! Game over.")
+
+
     else:
         print("You walk away, but something follows you...")
         print("You vanish into the darkness. Game over.")
